@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .card {
+    @apply my-4 border p-4 rounded-xl
+  }
+  input {
+    @apply border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2
+  },
+  label {
+    @apply block text-sm font-light
+  }
+}
+
