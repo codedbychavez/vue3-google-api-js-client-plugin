@@ -3,7 +3,6 @@ export default {
   setup() {},
   methods: {
     async handleAuthorizeButtonClick() {
-      console.log("click");
       await this.$google.api.auth2.getAuthInstance().signIn();
     },
   },
