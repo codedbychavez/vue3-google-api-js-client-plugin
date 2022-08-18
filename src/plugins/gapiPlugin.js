@@ -1,59 +1,57 @@
-const loadLibrary = function () {
-  return new Promise(function (resolve, reject) {
-    const src = 'https://apis.google.com/js/api.js'
-    let s = document.querySelector('script[src="' + src + '"]')
-    let shouldAppend = false
-    if (!s) {
-      s = document.createElement('script')
-      s.src = src
-      s.async =  true
-      s.onload = function () {
-        s.setAttribute('data-loaded', true)
-        resolve()
-      }
-      s.onerror = reject
-      shouldAppend  = true
-    } else if (s.hasAttribute('data-loaded')) {
-        resolve()
-    }
-    if (shouldAppend) {      
-      document.head.appendChild(s)
-    }
-  })
-}
+// Imports
+import { isScriptLoaded } from "./utils";
 
-const initClient = (config)  =>  {
+const loadLibrary = async () => {
+  const src = "https://apis.google.com/js/api.js";
+  const isScriptAdded = await isScriptLoaded(src);
+  if (isScriptAdded) {
+    return;
+  } else {
+    let fileref = document.createElement("script");
+    fileref.setAttribute("type", "text/javascript");
+    fileref.setAttribute("src", src);
+    fileref.async = true;
+    document.head.appendChild(fileref);
+  }
+};
+
+const initClient = (config) => {
   return new Promise((resolve, reject) => {
-    window.gapi.load('client:auth2', () => {
-      window.gapi.client.init(config)
-        .then(() => {
-          resolve(window.gapi)
-        }).catch((error) => {
-          reject(error)
-        })
-    })
-  })
-}
+    window.onload = () => {
+      window.gapi.load("client:auth2", () => {
+        window.gapi.client
+          .init(config)
+          .then(() => {
+            resolve(window.gapi);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    };
+  });
+};
 
 const Google = class {
-  constructor () {
-    this.api = null
-    this.isInit = false
+  constructor() {
+    this.api = null;
+    this.isInit = false;
   }
-  load (config) {
-    loadLibrary().then( () => {
-      return initClient(config)
-    }).then((gapi) => {
-      this.api = gapi
-      this.isInit = true
-    })
+  async load(config) {
+    console.log("Initializing Google API JavaScript Client...");
+    await loadLibrary();
+    await initClient(config).then((gapi) => {
+      this.api = gapi;
+      this.isInit = true;
+    });
+    console.log("Google API JavaScript Client Initialized");
   }
-}
+};
 
 export default {
   install: (app, config) => {
-    const google = new Google()
-    google.load(config)
+    const google = new Google();
+    google.load(config);
     app.config.globalProperties.$google = google;
-  }
-}
+  },
+};
