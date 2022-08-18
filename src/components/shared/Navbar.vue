@@ -13,7 +13,7 @@ export default {
       <router-link to="/" class="flex items-center text-white">
         <StoreIcon />
         <span class="self-center text-xl font-semibold whitespace-nowrap ml-2"
-          >Booqnly</span
+          >Example</span
         >
       </router-link>
     </div>
