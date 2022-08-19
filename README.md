@@ -2,7 +2,7 @@
 
 > This plugin was inspired by and is an update to https://www.npmjs.com/package/vue-googleapis
 
-A quick and easy way for using Google'e API JavaScript client to your Vue3
+A quick and easy way for using Google'e API JavaScript client in your Vue3 Application
 
 ## About
 
