@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import gapiPlugin from './plugins/gapiPlugin'
+import gapiPlugin from 'vue3-googleapis'
 
 import App from './App.vue'
 import router from './router'
