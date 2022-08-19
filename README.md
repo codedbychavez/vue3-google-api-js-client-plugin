@@ -39,7 +39,7 @@ app.use(gapiPlugin, {
 
 #### API Discovery Docs
 
-- Using the docs makes using this javascript client simple. Here is an example using the **mybusinessbusinessinformation** API discovery document:
+- Using the docs makes using this JavaScript client simple. Here is an example that uses the **mybusinessbusinessinformation** API discovery document for creating a new business location:
 
 1. Under the resources key: 
 
